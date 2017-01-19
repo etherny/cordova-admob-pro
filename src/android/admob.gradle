@@ -1,0 +1,27 @@
+def useFirebase = 'firebase' == project.getProperties()['adsPackage']
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:+'
+        classpath 'com.google.gms:google-services:+'
+    }
+}
+
+
+if (useFirebase) {
+    println "ADS:firebase:firebase-ads"
+    dependencies {
+        compile "com.google.firebase:firebase-core:10.+"
+    }
+} else {
+    println "ADS:play-services-ads"
+    dependencies {
+        compile "com.google.android.gms:play-services-ads:10.+"
+    }
+}
+
+apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
